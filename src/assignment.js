@@ -2,6 +2,7 @@
 // DO NOT REMOVE THE EXPORT KEYWORDS
 // ========================
 
+
 /**
  * Challenge - 1
  *
@@ -13,10 +14,20 @@
  * @returns number the sum of the numbers from 1 to destination
  */
 export function sumOfNumbersTo(destination) {
-    console.log(destination)
-    // write your code here
-    return 0
+  if (typeof destination !== "number" || destination < 1) {
+    return 0; 
+  }
+
+  
+  let sum = 0;
+  for (let i = 1; i <= destination; i++) {
+    sum += i;
+  }
+  return sum;
 }
+
+
+
 
 /**
  * Challenge - 2
@@ -27,20 +38,33 @@ export function sumOfNumbersTo(destination) {
  * @returns the object containing count, sum, arrayOfEvenNumbers from 1 to destination
  */
 export function evenNumbersWithin(destination) {
-    console.log(destination)
-    // get the number from 0 to destination
-    const sum = 0
-    const count = 0
-    const arrayOfEvenNumbers = []
-
-    // write your code here
-
+  if (typeof destination !== "number" || destination < 0) {
     return {
-        count,
-        sum,
-        arrayOfEvenNumbers,
+      count: 0,
+      sum: 0,
+      arrayOfEvenNumbers: []
+    };
+  }
+
+  let sum = 0;
+  let count = 0;
+  let arrayOfEvenNumbers = [];
+
+  for (let i = 0; i <= destination; i++) {
+    if (i % 2 === 0) {
+      arrayOfEvenNumbers.push(i);
+      sum += i;
+      count++;
     }
+  }
+
+  return {
+    count,
+    sum,
+    arrayOfEvenNumbers,
+  };
 }
+
 
 /**
  * Challenge - 3
@@ -56,12 +80,14 @@ export function evenNumbersWithin(destination) {
  * @returns Array the converted temperatures in Fahrenheit
  */
 export function celsiusToFahrenheit(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const result = []
+  console.log(arrayOfNumbers);
 
-    // write your code here
+  const result = arrayOfNumbers.map((celsius) => {
+    const fahrenheit = (celsius * 9) / 5 + 32;
+    return Math.trunc(fahrenheit);
+  });
 
-    return result
+  return result;
 }
 
 /**
@@ -74,19 +100,25 @@ export function celsiusToFahrenheit(arrayOfNumbers) {
  * @returns {object} the count, sum, and arrayOfOddNumbers
  */
 export function oddNumbersWithin(destination) {
-    console.log(destination)
-    // get the number from 0 to destination
-    const sum = 0
-    const count = 0
-    const arrayOfOddNumbers = []
+  console.log(destination);
 
-    // write your code here
+  let sum = 0;
+  let count = 0;
+  const arrayOfOddNumbers = [];
 
-    return {
-        count,
-        sum,
-        arrayOfOddNumbers,
+  for (let i = 0; i <= destination; i++) {
+    if (i % 2 !== 0) {
+      arrayOfOddNumbers.push(i);
+      sum += i;
+      count++;
     }
+  }
+
+  return {
+    count,
+    sum,
+    arrayOfOddNumbers,
+  };
 }
 
 /**
@@ -100,18 +132,25 @@ export function oddNumbersWithin(destination) {
  * @returns {object} the count, sum, and arrayOfMultiples
  */
 export function findMultiples(arrayOfNumbers, factor) {
-    console.log(arrayOfNumbers, factor)
-    const sum = 0
-    const count = 0
-    const arrayOfMultiples = []
+  console.log(arrayOfNumbers, factor);
 
-    // write your code here
+  let sum = 0;
+  let count = 0;
+  const arrayOfMultiples = [];
 
-    return {
-        count,
-        sum,
-        arrayOfMultiples,
+  for (let num of arrayOfNumbers) {
+    if (num % factor === 0) {
+      arrayOfMultiples.push(num);
+      sum += num;
+      count++;
     }
+  }
+
+  return {
+    count,
+    sum,
+    arrayOfMultiples,
+  };
 }
 
 /**
@@ -126,12 +165,25 @@ export function findMultiples(arrayOfNumbers, factor) {
  * @returns {Array} the array of factorial results
  */
 export function calculateFactorials(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const result = []
+  console.log(arrayOfNumbers);
 
-    // write your code here
+  const result = [];
 
-    return result
+  function factorial(n) {
+    if (n < 0) return 0;       // negative numbers
+    if (n === 0) return 1;     // 0! = 1
+    let product = 1;
+    for (let i = 1; i <= n; i++) {
+      product *= i;
+    }
+    return product;
+  }
+
+  for (let num of arrayOfNumbers) {
+    result.push(factorial(num));
+  }
+
+  return result;
 }
 
 /**
@@ -145,18 +197,37 @@ export function calculateFactorials(arrayOfNumbers) {
  * @returns {object} the count, sum, and arrayOfPrimes
  */
 export function findPrimeNumbers(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const sum = 0
-    const count = 0
-    const arrayOfPrimes = []
+  console.log(arrayOfNumbers);
 
-    // write your code here
+  let sum = 0;
+  let count = 0;
+  const arrayOfPrimes = [];
 
-    return {
-        count,
-        sum,
-        arrayOfPrimes,
+  // Helper function to check if a number is prime
+  function isPrime(num) {
+    if (num <= 1) return false;
+    if (num === 2) return true;
+    if (num % 2 === 0) return false;
+
+    for (let i = 3; i <= Math.sqrt(num); i += 2) {
+      if (num % i === 0) return false;
     }
+    return true;
+  }
+
+  for (let num of arrayOfNumbers) {
+    if (isPrime(num)) {
+      arrayOfPrimes.push(num);
+      sum += num;
+      count++;
+    }
+  }
+
+  return {
+    count,
+    sum,
+    arrayOfPrimes,
+  };
 }
 
 /**
@@ -168,13 +239,16 @@ export function findPrimeNumbers(arrayOfNumbers) {
  * @returns {Array} the array of doubled numbers
  */
 export function doubleTheValues(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const result = []
+  console.log(arrayOfNumbers);
+  const result = [];
 
-    // write your code here
+  for (let num of arrayOfNumbers) {
+    result.push(num * 2);
+  }
 
-    return result
+  return result;
 }
+
 
 // ========================
 // DO NOT REMOVE THE EXPORT KEYWORDS
